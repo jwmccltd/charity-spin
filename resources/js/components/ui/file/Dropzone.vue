@@ -37,7 +37,7 @@ const handleDrop = (event: DragEvent) => {
     @drop.prevent="handleDrop"
     @click="openFilePicker"
     :class="[
-      'flex flex-col items-center justify-center w-full h-48 border-2 border-dashed rounded-lg cursor-pointer transition-colors duration-200',
+      'flex flex-col items-center justify-center w-full h-full border-2 border-dashed rounded-lg cursor-pointer transition-colors duration-200',
       isDragging 
         ? 'border-primary bg-primary/10' 
         : 'border-muted-foreground/30 hover:border-primary/50 bg-card hover:bg-accent/10'
@@ -45,6 +45,7 @@ const handleDrop = (event: DragEvent) => {
   >
     <!-- Hidden native file input -->
     <input
+      accept=".mp3, .aac, .m4a, .m4b, .mp4, .ogg, .oga, .opus, .wma, .wav, .flac, .aif, .aiff, .ape"
       type="file"
       ref="fileInput"
       class="hidden"
@@ -70,4 +71,5 @@ const handleDrop = (event: DragEvent) => {
       <p class="text-xs text-muted-foreground">Any file type up to 10MB</p>
     </div>
   </div>
+  <div class="text-center mt-2">Accepted file formats: mp3, .aac, .m4a, .m4b, .mp4, .ogg, .oga, .opus, .wma, .wav, .flac, .aif, .aiff, .ape</div>
 </template>

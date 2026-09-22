@@ -30,23 +30,26 @@ const submit = () => {
 
 </script>
 <template>
-    <Dialog class="p-3" :open="isOpen" @update:open="isOpen = $event">
-        <DialogContent class="w-[calc(100%-1.5rem)] max-w-none sm:max-w-3/4 sm:h-3/4">
-            <DialogHeader class="flex items-center justify-center p-3">
-                <div class="progress-card">
-                  <h3 class="card-title">Create Campaign</h3>
-                    <ol class="arrow-steps">
-                      <li class="step completed"><span>Upload Audio</span></li>
-                      <li class="step active"><span>Add Artwork</span></li>
-                      <li class="step"><span>Release Details</span></li>
-                      <li class="step"><span>Select Charity</span></li>
-                      <li class="step"><span>Launch</span></li>
-                    </ol>
-                </div>
-                <Dropzone @files-dropped="(files) => console.log(files)" />
-            </DialogHeader>
-        </DialogContent>
-    </Dialog>            
+  <div class="min-h-screen bg-[#008A25]">
+    <div class="fixed top-[50%] left-[50%] h-2/3 z-50 grid w-2/3 max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg bg-white">
+      <div class="p-3 flex flex-col items-center">
+          <div class="progress-card">
+            <h1 class="card-title">Create Campaign</h1>
+              <ol class="arrow-steps">
+                <li class="step active"><span>Upload Audio</span></li>
+                <li class="step"><span>Add Artwork</span></li>
+                <li class="step"><span>Release Details</span></li>
+                <li class="step"><span>Select Charity</span></li>
+                <li class="step"><span>Launch</span></li>
+              </ol>
+          </div>
+          <div class="w-3/4">
+              <h1 class="text-center mb-2">Upload the Audio file for your release</h1>
+              <Dropzone @files-dropped="(files) => console.log(files)" />
+          </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
@@ -116,7 +119,7 @@ const submit = () => {
 
 /* State Styling: Active */
 .arrow-steps .step.active {
-  background-color: #2563eb;
+  background-color: #EE2925;
   color: #ffffff;
 }
 
