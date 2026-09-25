@@ -7,8 +7,10 @@ import AuthLayout from '@/layouts/AuthLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { initializeFlashToast } from '@/lib/flashToast';
 import { ZiggyVue } from 'ziggy-js';
+import { createPinia } from 'pinia';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const pinia = createPinia()
 
 void createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
@@ -17,6 +19,7 @@ void createInertiaApp({
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue) // 3. REGISTER ZIGGY GLOBAL PLUGIN
+            .use(pinia)
             .mount(el);
     },
     layout: (name) => {

@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-
-const emit = defineEmits<{
-  (e: 'files-dropped', files: FileList): void
-}>();
+import { useForm } from '@inertiajs/vue3';
 
 const isDragging = ref(false);
 const fileInput = ref<HTMLInputElement | null>(null);
@@ -13,11 +10,29 @@ const openFilePicker = () => {
   fileInput.value?.click();
 };
 
+const form = useForm({
+    files: [] as File[],
+});
+
+const onFilesDropped = (fileList: FileList) => {
+    form.files = Array.from(fileList);
+};
+
+// Submit file
+const submitFile = (files: FileList) => {
+    form.files = Array.from(files);
+
+    form.post(route('files.upload'), {
+        forceFormData: true,
+        onSuccess: () => form.reset(),
+    });
+};
+
 // Handle files selected via the standard file input
 const handleFileSelect = (event: Event) => {
   const target = event.target as HTMLInputElement;
   if (target.files && target.files.length > 0) {
-    emit('files-dropped', target.files);
+    submitFile(target.files);
   }
 };
 
@@ -25,12 +40,41 @@ const handleFileSelect = (event: Event) => {
 const handleDrop = (event: DragEvent) => {
   isDragging.value = false;
   if (event.dataTransfer?.files && event.dataTransfer.files.length > 0) {
-    emit('files-dropped', event.dataTransfer.files);
+    submitFile(event.dataTransfer.files);
   }
 };
+
+const getAcceptableExtensions = () => {
+  if (props.uploadType === 'release-artwork') {
+    return '.jpg, .jpeg, .png, .webp, .gif, .svg, .avif';
+  }
+
+  return '.mp3, .aac, .m4a, .m4b, .mp4, .ogg, .oga, .opus, .wma, .wav, .flac, .aif, .aiff, .ape';
+};
+
+const getAdditionalInfo = () => {
+  if (props.uploadType === 'release-artwork') {
+    return 'Image must be square and minimum 1200 x 1200 pixels';
+  }  
+  return '';
+};
+
+const props = defineProps({
+  uploadType: {
+    type: String,
+    default: null,
+  },
+  title: {
+    type: String,
+    default: null,
+  }
+});
 </script>
 
 <template>
+  <div class="mb-2 text-center" v-if="title">
+    {{ title }}
+  </div>
   <div
     @dragover.prevent="isDragging = true"
     @dragleave.prevent="isDragging = false"
@@ -45,7 +89,7 @@ const handleDrop = (event: DragEvent) => {
   >
     <!-- Hidden native file input -->
     <input
-      accept=".mp3, .aac, .m4a, .m4b, .mp4, .ogg, .oga, .opus, .wma, .wav, .flac, .aif, .aiff, .ape"
+      :accept="getAcceptableExtensions()"
       type="file"
       ref="fileInput"
       class="hidden"
@@ -68,8 +112,9 @@ const handleDrop = (event: DragEvent) => {
       <p class="mb-2 text-sm text-foreground font-medium">
         <span class="text-primary underline">Click to upload</span> or drag and drop
       </p>
-      <p class="text-xs text-muted-foreground">Any file type up to 10MB</p>
+      <p class="text-xs text-muted-foreground">Any allowed file type up to 100MB</p>
     </div>
   </div>
-  <div class="text-center mt-2">Accepted file formats: mp3, .aac, .m4a, .m4b, .mp4, .ogg, .oga, .opus, .wma, .wav, .flac, .aif, .aiff, .ape</div>
+  <div class="text-center mt-2">Accepted file formats: {{ getAcceptableExtensions() }}</div>
+  <div class="text-center mt-2">{{ getAdditionalInfo() }}</div>
 </template>
