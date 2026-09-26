@@ -60,6 +60,14 @@ return [
             'report' => false,
         ],
 
+        'artist_mp3s' => [
+            'driver' => env('ARTIST_MP3S_DRIVER', 'local'),
+            'root' => storage_path('app/artist_mp3s'),
+            'serve' => false,
+            'throw' => false,
+            'report' => false,
+        ],
+
     ],
 
     /*
