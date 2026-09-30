@@ -2,6 +2,10 @@
 import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 
+const emit = defineEmits<{
+  triggerFileUpload: [files: FileList]
+}>();
+
 const isDragging = ref(false);
 const fileInput = ref<HTMLInputElement | null>(null);
 
@@ -32,7 +36,7 @@ const submitFile = (files: FileList) => {
 const handleFileSelect = (event: Event) => {
   const target = event.target as HTMLInputElement;
   if (target.files && target.files.length > 0) {
-    submitFile(target.files);
+    emit('triggerFileUpload', target.files);
   }
 };
 
@@ -40,7 +44,7 @@ const handleFileSelect = (event: Event) => {
 const handleDrop = (event: DragEvent) => {
   isDragging.value = false;
   if (event.dataTransfer?.files && event.dataTransfer.files.length > 0) {
-    submitFile(event.dataTransfer.files);
+    emit('triggerFileUpload', event.dataTransfer.files);
   }
 };
 

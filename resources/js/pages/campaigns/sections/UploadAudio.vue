@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { Dropzone } from '@/components/ui/file';
+import UploadFile from './UploadFile.vue';
 </script>
+
 <template>
-    <Dropzone
+    <UploadFile
         title="Upload the audio file for your release"
     />
 </template>

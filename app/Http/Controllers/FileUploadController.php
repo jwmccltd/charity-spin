@@ -2,39 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use Illuminate\Http\Request;
-use FFMpeg\Format\Audio\Mp3;
 use Illuminate\Support\Str;
 use Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Jobs\ProcessCampaignAudio;
 
 class FileUploadController extends Controller
 {
     public function upload(Request $request)
     {
-        $fileName = Auth::id() . '/' . Auth::id() . '_' . Str::random(64) . '.mp3';
-        $file = FFMpeg::open($request->file('files')[0]);
+        $file = $request->file('files')[0];
+        $fileName = Auth::id() . '/' . Auth::id() . '_' . $request->input('unique_key');
+        $path = $file->storeAs('/', $fileName . '.' . $file->getClientOriginalExtension(), 'artist_mp3s');
 
-        $audioStream = $file->getAudioStream();
-
-        if (!$audioStream) {
-            return Redirect::back()->withErrors([
-                'media' => 'The uploaded media does not contain an audio track.',
-            ]);
-        }
-
-        $file->export()
-            ->toDisk('artist_mp3s')
-            ->addFilter([
-                '-filter:a',
-                'loudnorm=I=-14:LRA=11:TP=-1',
-            ])
-            ->addFilter([
-                '-q:a',
-                '0',
-            ])
-            ->inFormat(new Mp3)
-            ->save("$fileName");
+        ProcessCampaignAudio::dispatch($path, $request->input('unique_key'));
     }
 }
