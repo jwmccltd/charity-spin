@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 
+
 const emit = defineEmits<{
   triggerFileUpload: [files: FileList]
 }>();

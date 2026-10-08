@@ -15,7 +15,7 @@ export function useFileUploadProgress() {
   const progress = ref<number>(0);
   const status = ref<ProgressStatus>('pending');
   const errorMessage = ref<string>('');
-  
+
   // Use ReturnType to support both Browser and Node environments correctly
   let pollInterval: ReturnType<typeof setInterval> | null = null;
 
@@ -33,13 +33,13 @@ export function useFileUploadProgress() {
     progress.value = 0;
     status.value = 'processing';
     errorMessage.value = '';
-    
+
     stopPolling();
 
     pollInterval = setInterval(async () => {
       try {
         const response = await axios.get<ProgressResponse>(`/api/file-progress/${trackerKey}`);
-        
+
         status.value = response.data.status;
         progress.value = response.data.progress;
 

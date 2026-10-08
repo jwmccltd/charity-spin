@@ -17,12 +17,15 @@ class ProcessCampaignAudio implements ShouldQueue
     public string $fileName;
     public string $trackerKey;
 
+    public string $extension;
+
     /**
      * Create a new job instance.
      */
-    public function __construct($fileName, string $trackerKey)
+    public function __construct(string $fileName, string $extension, string $trackerKey)
     {
         $this->fileName = $fileName;
+        $this->extension = $extension;
         // A unique identifier sent from the frontend (e.g., a UUID or slug)
         // to track this specific file's progress.
         $this->trackerKey = $trackerKey;
@@ -34,9 +37,10 @@ class ProcessCampaignAudio implements ShouldQueue
     public function handle(): void
     {
         // Initialize progress at 0
-        Cache::store('redis')->put($this->trackerKey, ['status' => 'processing', 'progress' => 0], 3600);
+        Cache::store('redis')
+            ->put($this->trackerKey, ['status' => 'processing', 'progress' => 0], 3600);
 
-        $file = FFMpeg::fromDisk('artist_mp3s')->open($this->fileName);
+        $file = FFMpeg::fromDisk('artist_mp3s')->open($this->fileName . '.' . $this->extension);
         $audioStream = $file->getAudioStream();
 
         if (!$audioStream) {
@@ -62,7 +66,7 @@ class ProcessCampaignAudio implements ShouldQueue
                     'progress' => (int) $percentage
                 ], 3600);
             })
-            ->save($this->fileName); // Fixed: changed "$fileName" string literal to variable
+            ->save($this->fileName . '.mp3'); // Fixed: changed "$fileName" string literal to variable
 
         // Mark as finished
         Cache::store('redis')->put($this->trackerKey, ['status' => 'completed', 'progress' => 100], 3600);

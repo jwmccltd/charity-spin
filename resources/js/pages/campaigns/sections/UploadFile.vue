@@ -2,6 +2,8 @@
 import { Dropzone } from '@/components/ui/file';
 import { useUploadFile } from '@/composables/useUploadFile';
 import { useFileUploadProgress } from '@/composables/useFileUploadProgress';
+import { watch } from 'vue';
+import { ProgressBar } from '@/components/ui/progress';
 
 const props = defineProps<{
     uploadType?: string;
@@ -9,7 +11,7 @@ const props = defineProps<{
 }>();
 
 const { triggerFileUpload, uniqueKey } = useUploadFile();
-const { startPolling } = useFileUploadProgress();
+const { progress, status, errorMessage, startPolling } = useFileUploadProgress();
 
 const handleFileUpload = async (files: FileList) => {
     try {
@@ -22,6 +24,10 @@ const handleFileUpload = async (files: FileList) => {
         console.error('File upload failed:', error);
     }
 };
+
+watch(progress, (newProgress, oldProgress) => {
+    console.log('Progress changed:', newProgress, '→', oldProgress);
+});
 </script>
 
 <template>
@@ -30,4 +36,5 @@ const handleFileUpload = async (files: FileList) => {
         :title="props.title"
         @trigger-file-upload="handleFileUpload"
     />
+    <ProgressBar v-if="status === 'processing'" :progress="progress" />
 </template>
