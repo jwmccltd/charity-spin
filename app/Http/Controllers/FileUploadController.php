@@ -14,6 +14,6 @@ class FileUploadController extends Controller
         $fileName = Auth::id() . '/' . Auth::id() . '_' . $request->input('unique_key');
         $path = $file->storeAs('/', $fileName . '.' . $file->getClientOriginalExtension(), 'artist_mp3s');
 
-        ProcessCampaignAudio::dispatch($fileName, $file->getClientOriginalExtension(), $request->input('unique_key'));
+        ProcessCampaignAudio::dispatchSync($fileName, $file->getClientOriginalExtension(), $request->input('unique_key'));
     }
 }

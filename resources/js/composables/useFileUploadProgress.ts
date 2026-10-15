@@ -1,5 +1,6 @@
 import { ref, onUnmounted } from 'vue';
 import axios from 'axios';
+import { useEventStore } from '@/stores/useEventStore';
 
 // Define the strict typing for the job status
 export type ProgressStatus = 'pending' | 'processing' | 'completed' | 'failed';
@@ -29,6 +30,8 @@ export function useFileUploadProgress() {
 
   // Kick off the polling loop
   const startPolling = (trackerKey: string): void => {
+    const eventStore = useEventStore();
+
     // Reset states
     progress.value = 0;
     status.value = 'processing';
@@ -45,6 +48,7 @@ export function useFileUploadProgress() {
 
         if (response.data.status === 'completed' || response.data.status === 'failed') {
           stopPolling();
+          eventStore.triggerEvent('release-campaign-progress');
           if (response.data.status === 'failed') {
             errorMessage.value = response.data.error || 'An unexpected error occurred.';
           }

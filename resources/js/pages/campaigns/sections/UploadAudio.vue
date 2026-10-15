@@ -4,6 +4,6 @@ import UploadFile from './UploadFile.vue';
 
 <template>
     <UploadFile
-        title="Upload the audio file for your release"
+        title="Upload the audio file for your campaign"
     />
 </template>

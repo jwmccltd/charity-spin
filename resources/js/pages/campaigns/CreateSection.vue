@@ -1,5 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import { useEventStore } from '@/stores/useEventStore';
+
+const eventStore = useEventStore();
+
+watch (
+  () => eventStore.lastEvent,
+  (newEvent) => {
+    if (!newEvent) return;
+
+    // TypeScript automatically narrows down the payload type based on the name check
+    if (newEvent.name === 'lock-campaign-progress') {
+      isDisabled.value = true;
+    }
+
+    if (newEvent.name === 'release-campaign-progress') {
+      isDisabled.value = false;
+    }
+  }
+);
 
 const steps = [
     { section: 'audio', label: 'Upload Audio' },
@@ -14,6 +33,8 @@ const activeStep = ref('audio');
 const setActiveStep = (section: string) => {
     activeStep.value = section;
 };
+
+const isDisabled = ref(false);
 
 </script>
 
@@ -34,8 +55,8 @@ const setActiveStep = (section: string) => {
                         <li
                             v-for="step in steps"
                             :key="step.section"
-                            class="step cursor-pointer"
-                            :class="{ active: activeStep === step.section }"
+                            class="step"
+                            :class="{ active: activeStep === step.section, 'cursor-pointer' : !isDisabled, 'cursor-not-allowed' : isDisabled  }"
                             @click="setActiveStep(step.section)"
                         >
                             <span>{{ step.label }}</span>
@@ -65,13 +86,6 @@ const setActiveStep = (section: string) => {
     padding: 24px;
     background: #ffffff;
     border-radius: 12px;
-
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        sans-serif;
 }
 
 .card-title {
