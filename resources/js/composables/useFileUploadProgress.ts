@@ -1,6 +1,7 @@
 import { ref, onUnmounted } from 'vue';
 import axios from 'axios';
 import { useEventStore } from '@/stores/useEventStore';
+import { createFormStore } from '@/stores/formStore';
 
 // Define the strict typing for the job status
 export type ProgressStatus = 'pending' | 'processing' | 'completed' | 'failed';
@@ -49,11 +50,31 @@ export function useFileUploadProgress() {
         if (response.data.status === 'completed' || response.data.status === 'failed') {
           stopPolling();
           eventStore.triggerEvent('release-campaign-progress');
+
+          const useCampaignStore = createFormStore('campaign');
+          const campaignStore = useCampaignStore(); 
+
+          const campaignDataId = campaignStore.getFormDataItem('id');
+
+          let campaignUrl = `/api/campaign/tracker/${trackerKey}`;  
+
+          if (typeof campaignDataId !== 'undefined') {
+            campaignUrl = '/api/campaign/id/' + campaignDataId;
+          }  
+
+          const campaign = await axios.get(campaignUrl);
+          //formStore.storeFormData('campaignData', JSON.stringify(campaign.data));
+          for (const [key, value] of Object.entries(campaign.data)) {
+            campaignStore.storeFormDataItem(key, JSON.stringify(value) ?? '');
+          }
+
           if (response.data.status === 'failed') {
             errorMessage.value = response.data.error || 'An unexpected error occurred.';
           }
         }
       } catch (error: any) {
+        console.log(error);
+
         stopPolling();
         status.value = 'failed';
         errorMessage.value = error.response?.data?.message || 'Failed to fetch progress updates.';

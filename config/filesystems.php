@@ -68,6 +68,14 @@ return [
             'report' => false,
         ],
 
+         'artist_artwork' => [
+            'driver' => env('ARTIST_ARTWORK_DRIVER', 'local'),
+            'root' => storage_path('app/artist_artwork'),
+            'serve' => false,
+            'throw' => false,
+            'report' => false,
+        ],
+
     ],
 
     /*

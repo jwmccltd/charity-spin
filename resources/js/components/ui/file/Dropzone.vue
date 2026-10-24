@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { FileMusic } from '@lucide/vue';
-
 
 const emit = defineEmits<{
   triggerFileUpload: [files: FileList]
@@ -37,18 +35,15 @@ const handleDrop = (event: DragEvent) => {
 };
 
 const getAcceptableExtensions = () => {
-  if (props.uploadType === 'release-artwork') {
-    return '.jpg, .jpeg, .png, .webp, .gif, .svg, .avif';
-  }
-
-  return '.mp3, .aac, .m4a, .m4b, .mp4, .ogg, .oga, .opus, .wma, .wav, .flac, .aif, .aiff, .ape';
+  return props.allowedExtensions;
 };
 
 const getAdditionalInfo = () => {
-  if (props.uploadType === 'release-artwork') {
-    return 'Image must be square and minimum 1200 x 1200 pixels';
-  }  
-  return '';
+  return props.additionalInfo;
+};
+
+const getAllowedUploadSize = () => {  
+  return props.maxFileSize;
 };
 
 const props = defineProps({
@@ -64,6 +59,18 @@ const props = defineProps({
     type: String,
     default: 'upload'
   },
+  allowedExtensions: {
+    type: String,
+    default: '',
+  },
+  additionalInfo: {
+    type: String,
+    default: '',
+  },
+  maxFileSize: {
+    type: String,
+    default: '10MB',
+  }
 });
 </script>
 
@@ -109,15 +116,12 @@ const props = defineProps({
         <p class="mb-2 text-sm text-foreground font-medium">
           <span class="text-primary underline">Click to upload</span> or drag and drop
         </p>
-        <p class="text-xs text-muted-foreground">Any allowed file type up to 100MB</p>
+        <p class="text-xs text-muted-foreground">
+          Max file size: {{ getAllowedUploadSize() }}
+        </p>
       </div>
     </div>
     <div class="text-center mt-2">Accepted file formats: {{ getAcceptableExtensions() }}</div>
     <div class="text-center mt-2">{{ getAdditionalInfo() }}</div>
-  </div>
-  <div class="flex items-center justify-between w-full h-full mt-4" v-if="fileName.length > 0">
-    <div class="flex items-center">
-      <FileMusic :size="48"/> {{ fileName }}
-    </div>
   </div>
 </template>

@@ -3,9 +3,8 @@ import { ref } from 'vue';
 
 // 1. Define the interface for the events your app supports
 export interface AppEvents {
-  'user-logged-in': { username: string; role: string };
-  'toast-notification': { message: string; type: 'success' | 'error' };
-  'cart-updated': { itemCount: number };
+  'lock-campaign-progress': void;
+  'release-campaign-progress': void;
 }
 
 // 2. Shape of the stored event object
@@ -26,8 +25,6 @@ export const useEventStore = defineStore('eventStore', () => {
       payload: payload,
       timestamp: Date.now(),
     };
-
-    console.log(`[Global Event]: ${eventName}`, payload);
   }
 
   return { lastEvent, triggerEvent };

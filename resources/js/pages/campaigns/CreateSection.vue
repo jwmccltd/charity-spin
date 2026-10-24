@@ -2,6 +2,13 @@
 import { ref, watch } from 'vue';
 import { useEventStore } from '@/stores/useEventStore';
 
+const props = defineProps({
+    completedSteps: {
+        type: Array,
+        default: () => [],
+    }
+});
+
 const eventStore = useEventStore();
 
 watch (
@@ -20,10 +27,14 @@ watch (
   }
 );
 
+const isStepCompleted = (section: string) => {
+    return props.completedSteps.includes(section);
+};
+
 const steps = [
     { section: 'audio', label: 'Upload Audio' },
-    { section: 'artwork', label: 'Add Artwork' },
-    { section: 'release-details', label: 'Release Details' },
+    { section: 'artwork', label: 'Add Artwork'  },
+    { section: 'details', label: 'Track Details'  },
     { section: 'charity', label: 'Select Charity' },
     { section: 'launch', label: 'Launch' },
 ];
@@ -56,7 +67,12 @@ const isDisabled = ref(false);
                             v-for="step in steps"
                             :key="step.section"
                             class="step"
-                            :class="{ active: activeStep === step.section, 'cursor-pointer' : !isDisabled, 'cursor-not-allowed' : isDisabled  }"
+                            :class="{ 
+                                active: activeStep === step.section,
+                                'completed': isStepCompleted(step.section),
+                                'cursor-pointer' : !isDisabled,
+                                'cursor-not-allowed opacity-50' : isDisabled  
+                            }"
                             @click="setActiveStep(step.section)"
                         >
                             <span>{{ step.label }}</span>
@@ -140,14 +156,13 @@ const isDisabled = ref(false);
         color 0.3s ease;
 }
 
-/* Completed */
-
-.arrow-steps .step.completed {
-    background-color: #dcfce7;
-    color: #15803d;
-}
 
 /* Active */
+
+.arrow-steps .step.completed {
+    background-color: black;
+    color: #ffffff;
+}
 
 .arrow-steps .step.active {
     background-color: #00adf1;

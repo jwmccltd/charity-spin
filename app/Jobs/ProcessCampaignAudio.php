@@ -9,26 +9,34 @@ use Illuminate\Support\Facades\Cache;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use FFMpeg\Format\Audio\Mp3;
 use Throwable;
+use Storage;
+use App\Services\CampaignService;
 
 class ProcessCampaignAudio implements ShouldQueue
 {
     use Queueable, InteractsWithQueue;
 
     public string $fileName;
+    public string $originalFileName;
     public string $trackerKey;
+    public string|null $id;
 
     public string $extension;
+    public CampaignService $campaignService;
 
     /**
      * Create a new job instance.
      */
-    public function __construct(string $fileName, string $extension, string $trackerKey)
+    public function __construct(string $fileName, string $originalFileName, string $extension, $trackerKey, ?string $id = null)
     {
         $this->fileName = $fileName;
+        $this->originalFileName = $originalFileName;
         $this->extension = $extension;
         // A unique identifier sent from the frontend (e.g., a UUID or slug)
         // to track this specific file's progress.
         $this->trackerKey = $trackerKey;
+        $this->campaignService = new CampaignService();
+        $this->id = $id;
     }
 
     /**
@@ -66,8 +74,16 @@ class ProcessCampaignAudio implements ShouldQueue
                     'progress' => (int) $percentage
                 ], 3600);
             })
-            ->save($this->fileName . '.mp3'); // Fixed: changed "$fileName" string literal to variable
+            ->save($this->fileName . '_processed.mp3'); // Fixed: changed "$fileName" string literal to variable
 
+        Storage::disk('artist_mp3s')->delete($this->fileName . '.' . $this->extension);
+
+        $this->campaignService->createUpdate([
+            'file_key' => $this->trackerKey,
+            'audio_file_path' => $this->fileName . '_processed.mp3',
+            'original_audio_file_name' => $this->originalFileName,
+        ], $this->id);
+        
         // Mark as finished
         Cache::store('redis')->put($this->trackerKey, ['status' => 'completed', 'progress' => 100], 3600);
     }
