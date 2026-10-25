@@ -6,7 +6,8 @@ import { ref, onMounted } from 'vue';
 import { ProgressBar } from '@/components/ui/progress';
 import { useEventStore } from '@/stores/useEventStore';
 import { createFormStore } from '@/stores/formStore';
-import { FileMusic } from '@lucide/vue';
+import { FileMusic, FileImage } from '@lucide/vue';
+import { Mp3Player } from '@/components/ui/audio';
 
 const props = defineProps<{
     uploadType: string;
@@ -71,7 +72,10 @@ const handleFileUpload = async (files: FileList) => {
     />
     <div class="flex items-center justify-between w-full h-full mt-7" v-if="currentFileName && currentFileName !== 'null'">
         <div class="flex items-center">
-            <FileMusic :size="48"/> {{ currentFileName }}
+            <div class="flex items-center" v-if="props.uploadType === 'audio'">
+                <Mp3Player :track-title="currentFileName"/>
+            </div>
+            <div class="flex items-center" v-if="props.uploadType === 'artwork'"><FileImage :size="48"/> {{ currentFileName }} </div>
         </div>
     </div>
     <ProgressBar class="mt-4" v-if="showProgressBar" :progress="progress" :status="status" />

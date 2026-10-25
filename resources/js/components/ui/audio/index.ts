@@ -1,0 +1,1 @@
+export { default as Mp3Player } from "./Mp3Player.vue"

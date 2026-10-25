@@ -1,0 +1,451 @@
+name,parent
+Pop,
+Dance-pop,Pop
+Synth-pop,Pop
+Indie pop,Pop
+Electropop,Pop
+K-pop,Pop
+J-pop,Pop
+C-pop,Pop
+Art pop,Pop
+Dream pop,Pop
+Bedroom pop,Pop
+Hyperpop,Pop
+Teen pop,Pop
+Power pop,Pop
+Baroque pop,Pop
+Sophisti-pop,Pop
+Rock,
+Classic rock,Rock
+Hard rock,Rock
+Soft rock,Rock
+Alternative rock,Rock
+Indie rock,Rock
+Punk rock,Rock
+Pop rock,Rock
+Progressive rock,Rock
+Psychedelic rock,Rock
+Garage rock,Rock
+Glam rock,Rock
+Southern rock,Rock
+Blues rock,Rock
+Folk rock,Rock
+Arena rock,Rock
+Surf rock,Rock
+Post-rock,Rock
+Math rock,Rock
+Grunge,Alternative rock
+Shoegaze,Alternative rock
+Gothic rock,Rock
+Rockabilly,Rock
+Christian rock,Rock
+Metal,
+Heavy metal,Metal
+Thrash metal,Heavy metal
+Death metal,Heavy metal
+Black metal,Heavy metal
+Power metal,Heavy metal
+Doom metal,Heavy metal
+Symphonic metal,Metal
+Progressive metal,Metal
+Metalcore,Metal
+Deathcore,Metal
+Nu metal,Metal
+Alternative metal,Metal
+Folk metal,Metal
+Gothic metal,Metal
+Industrial metal,Metal
+Sludge metal,Metal
+Stoner metal,Metal
+Groove metal,Metal
+Speed metal,Metal
+Post-metal,Metal
+Djent,Metal
+Hip-Hop and Rap,
+Hip-hop,Hip-Hop and Rap
+Rap,Hip-Hop and Rap
+Trap,Hip-Hop and Rap
+Drill,Hip-Hop and Rap
+UK drill,Drill
+Grime,Hip-Hop and Rap
+Boom bap,Hip-Hop and Rap
+Conscious hip-hop,Hip-Hop and Rap
+Gangsta rap,Hip-Hop and Rap
+Old-school hip-hop,Hip-Hop and Rap
+Alternative hip-hop,Hip-Hop and Rap
+Jazz rap,Hip-Hop and Rap
+Mumble rap,Hip-Hop and Rap
+Cloud rap,Hip-Hop and Rap
+Emo rap,Hip-Hop and Rap
+Horrorcore,Hip-Hop and Rap
+Phonk,Hip-Hop and Rap
+Lo-fi hip-hop,Hip-Hop and Rap
+Crunk,Hip-Hop and Rap
+G-funk,Hip-Hop and Rap
+Experimental hip-hop,Hip-Hop and Rap
+Underground hip-hop,Hip-Hop and Rap
+Electronic and Dance,
+Electronic dance music (EDM),Electronic and Dance
+House,Electronic and Dance
+Deep house,House
+Tech house,House
+Progressive house,House
+Acid house,House
+Afro house,Electronic and Dance
+Techno,Electronic and Dance
+Detroit techno,Electronic and Dance
+Minimal techno,Electronic and Dance
+Trance,Electronic and Dance
+Psytrance,Electronic and Dance
+Hard trance,Electronic and Dance
+Drum and bass,Electronic and Dance
+Liquid drum and bass,Drum and bass
+Jungle,Electronic and Dance
+Dubstep,Electronic and Dance
+Brostep,Electronic and Dance
+UK garage,Electronic and Dance
+Speed garage,Electronic and Dance
+Bassline,Electronic and Dance
+Breakbeat,Electronic and Dance
+Big beat,Electronic and Dance
+Hardcore techno,Electronic and Dance
+Happy hardcore,Electronic and Dance
+Hardstyle,Electronic and Dance
+Gabber,Electronic and Dance
+Electro,Electronic and Dance
+Electro house,Electronic and Dance
+Future bass,Electronic and Dance
+UK bass,Electronic and Dance
+Ambient electronic,Electronic and Dance
+Downtempo,Electronic and Dance
+Trip-hop,Electronic and Dance
+IDM,Electronic and Dance
+Glitch,Electronic and Dance
+Synthwave,Electronic and Dance
+Chillwave,Electronic and Dance
+Vaporwave,Electronic and Dance
+Electro swing,Electronic and Dance
+R&B and Soul,
+Rhythm and blues (R&B),R&B and Soul
+Contemporary R&B,R&B and Soul
+Alternative R&B,R&B and Soul
+Neo-soul,R&B and Soul
+Classic soul,R&B and Soul
+Motown,R&B and Soul
+Funk,R&B and Soul
+P-funk,R&B and Soul
+Quiet storm,R&B and Soul
+New jack swing,R&B and Soul
+Blue-eyed soul,R&B and Soul
+Psychedelic soul,R&B and Soul
+Gospel soul,R&B and Soul
+Northern soul,R&B and Soul
+Contemporary soul,R&B and Soul
+Disco,R&B and Soul
+Boogie,R&B and Soul
+Future soul,R&B and Soul
+Jazz,
+Traditional jazz,Jazz
+Dixieland,Jazz
+Swing,Jazz
+Bebop,Jazz
+Hard bop,Jazz
+Cool jazz,Jazz
+Modal jazz,Jazz
+Free jazz,Jazz
+Avant-garde jazz,Jazz
+Jazz fusion,Jazz
+Smooth jazz,Jazz
+Acid jazz,Jazz
+Latin jazz,Jazz
+Gypsy jazz,Jazz
+Vocal jazz,Jazz
+Jazz funk,Jazz
+Nu jazz,Jazz
+Big band,Jazz
+Spiritual jazz,Jazz
+Contemporary jazz,Jazz
+Blues,
+Delta blues,Blues
+Chicago blues,Blues
+Texas blues,Blues
+Country blues,Blues
+Piedmont blues,Blues
+Electric blues,Blues
+Acoustic blues,Blues
+Jump blues,Blues
+British blues,Blues
+Swamp blues,Blues
+Gospel blues,Blues
+Rhythm and blues,Blues
+Country and Americana,
+Country,Country and Americana
+Traditional country,Country and Americana
+Country pop,Country and Americana
+Country rock,Country and Americana
+Outlaw country,Country and Americana
+Alternative country,Country and Americana
+Country folk,Country and Americana
+Bluegrass,Country and Americana
+Honky-tonk,Country and Americana
+Western swing,Country and Americana
+Nashville sound,Country and Americana
+Red dirt,Country and Americana
+Americana,Country and Americana
+Alt-country,Country and Americana
+Cowpunk,Country and Americana
+Southern gothic,Country and Americana
+Contemporary bluegrass,Country and Americana
+Folk and Acoustic,
+Folk,Folk and Acoustic
+Contemporary folk,Folk and Acoustic
+Traditional folk,Folk and Acoustic
+Indie folk,Folk and Acoustic
+Folk punk,Folk and Acoustic
+Psychedelic folk,Folk and Acoustic
+Freak folk,Folk and Acoustic
+Neofolk,Folk and Acoustic
+Singer-songwriter,Folk and Acoustic
+Acoustic pop,Folk and Acoustic
+Celtic folk,Folk and Acoustic
+English folk,Folk and Acoustic
+Scottish folk,Folk and Acoustic
+Irish folk,Folk and Acoustic
+Nordic folk,Folk and Acoustic
+Appalachian folk,Folk and Acoustic
+Protest folk,Folk and Acoustic
+Chamber folk,Folk and Acoustic
+Reggae and Caribbean,
+Reggae,Reggae and Caribbean
+Roots reggae,Reggae and Caribbean
+Dub,Reggae and Caribbean
+Dancehall,Reggae and Caribbean
+Ska,Reggae and Caribbean
+Rocksteady,Reggae and Caribbean
+Lovers rock,Reggae and Caribbean
+Ragga,Reggae and Caribbean
+Reggaeton,Reggae and Caribbean
+Soca,Reggae and Caribbean
+Calypso,Reggae and Caribbean
+Mento,Reggae and Caribbean
+Zouk,Reggae and Caribbean
+Bouyon,Reggae and Caribbean
+Kompa,Reggae and Caribbean
+Dancehall pop,Reggae and Caribbean
+Ska punk,Reggae and Caribbean
+Latin Music,
+Salsa,Latin Music
+Bachata,Latin Music
+Merengue,Latin Music
+Cumbia,Latin Music
+Tango,Latin Music
+Bossa nova,Latin Music
+Samba,Latin Music
+Latin pop,Latin Music
+Latin trap,Latin Music
+Latin hip-hop,Latin Music
+Regional Mexican,Latin Music
+Mariachi,Latin Music
+Norteño,Latin Music
+Banda,Latin Music
+Corridos tumbados,Latin Music
+Bolero,Latin Music
+Flamenco,Latin Music
+Rumba,Latin Music
+Mambo,Latin Music
+Cha-cha-chá,Latin Music
+Dembow,Latin Music
+Brazilian funk,Latin Music
+MPB (Brazilian popular music),Latin Music
+Forró,Latin Music
+Sertanejo,Latin Music
+Classical and Orchestral,
+Classical,Classical and Orchestral
+Baroque,Classical and Orchestral
+Renaissance music,Classical and Orchestral
+Romantic classical,Classical and Orchestral
+Contemporary classical,Classical and Orchestral
+Modern classical,Classical and Orchestral
+Minimalism,Classical and Orchestral
+Opera,Classical and Orchestral
+Chamber music,Classical and Orchestral
+Symphony,Classical and Orchestral
+Choral music,Classical and Orchestral
+Sacred classical,Classical and Orchestral
+Orchestral soundtrack,Classical and Orchestral
+Neoclassical,Classical and Orchestral
+Experimental classical,Classical and Orchestral
+Ballet music,Classical and Orchestral
+Impressionist classical,Classical and Orchestral
+Punk and Alternative,
+Punk,Punk and Alternative
+Hardcore punk,Punk and Alternative
+Post-punk,Punk and Alternative
+Pop punk,Punk and Alternative
+Skate punk,Punk and Alternative
+Emo,Punk and Alternative
+Screamo,Punk and Alternative
+Post-hardcore,Punk and Alternative
+Melodic hardcore,Punk and Alternative
+Crust punk,Punk and Alternative
+Anarcho-punk,Punk and Alternative
+Riot grrrl,Punk and Alternative
+Garage punk,Punk and Alternative
+Noise rock,Punk and Alternative
+Noise pop,Punk and Alternative
+New wave,Punk and Alternative
+No wave,Punk and Alternative
+Goth,Punk and Alternative
+Darkwave,Punk and Alternative
+Coldwave,Punk and Alternative
+African Music,
+Afrobeats,African Music
+Afrobeat,African Music
+Amapiano,African Music
+Highlife,African Music
+Mbalax,African Music
+Soukous,African Music
+Congolese rumba,African Music
+Kwaito,African Music
+Gqom,African Music
+Bongo flava,African Music
+Gengetone,African Music
+Fuji,African Music
+Juju,African Music
+Makossa,African Music
+Mbaqanga,African Music
+Rai,African Music
+Gnawa,African Music
+Ethio-jazz,African Music
+African gospel,African Music
+Traditional African music,African Music
+Asian Music,
+Bollywood,Asian Music
+Indian classical,Asian Music
+Hindustani classical,Asian Music
+Carnatic music,Asian Music
+Bhangra,Asian Music
+Qawwali,Asian Music
+Ghazal,Asian Music
+Indian film music,Asian Music
+Pakistani pop,Asian Music
+Arabic pop,Asian Music
+Traditional Chinese music,Asian Music
+Cantopop,Asian Music
+Mandopop,Asian Music
+Enka,Asian Music
+City pop,Asian Music
+J-rock,Asian Music
+Visual kei,Asian Music
+Anime music,Asian Music
+Traditional Japanese music,Asian Music
+Trot,Asian Music
+Korean hip-hop,Asian Music
+Thai pop,Asian Music
+V-pop,Asian Music
+Dangdut,Asian Music
+Indonesian pop,Asian Music
+Gamelan,Asian Music
+Experimental and Avant-Garde,
+Experimental music,Experimental and Avant-Garde
+Noise music,Experimental and Avant-Garde
+Harsh noise,Experimental and Avant-Garde
+Drone,Experimental and Avant-Garde
+Musique concrète,Experimental and Avant-Garde
+Free improvisation,Experimental and Avant-Garde
+Industrial,Experimental and Avant-Garde
+Dark ambient,Experimental and Avant-Garde
+Power electronics,Experimental and Avant-Garde
+Deconstructed club,Experimental and Avant-Garde
+Experimental pop,Experimental and Avant-Garde
+Avant-garde,Experimental and Avant-Garde
+Sound collage,Experimental and Avant-Garde
+Microsound,Experimental and Avant-Garde
+Electroacoustic music,Experimental and Avant-Garde
+Free improvisational jazz,Experimental and Avant-Garde
+Ambient and Relaxation,
+Ambient,Ambient and Relaxation
+Space ambient,Ambient and Relaxation
+Drone ambient,Ambient and Relaxation
+New age,Ambient and Relaxation
+Meditation music,Ambient and Relaxation
+Healing music,Ambient and Relaxation
+Sleep music,Ambient and Relaxation
+Chillout,Ambient and Relaxation
+Lounge,Ambient and Relaxation
+Relaxation music,Ambient and Relaxation
+Nature soundscapes,Ambient and Relaxation
+Atmospheric instrumental,Ambient and Relaxation
+Minimal ambient,Ambient and Relaxation
+Ethereal wave,Ambient and Relaxation
+Cinematic ambient,Ambient and Relaxation
+Gospel and Religious Music,
+Gospel,Gospel and Religious Music
+Traditional gospel,Gospel and Religious Music
+Contemporary gospel,Gospel and Religious Music
+Southern gospel,Gospel and Religious Music
+Christian pop,Gospel and Religious Music
+Christian hip-hop,Gospel and Religious Music
+Contemporary Christian music,Gospel and Religious Music
+Worship music,Gospel and Religious Music
+Praise and worship,Gospel and Religious Music
+Gregorian chant,Gospel and Religious Music
+Sacred choral music,Gospel and Religious Music
+Spirituals,Gospel and Religious Music
+Christian metal,Gospel and Religious Music
+Nasheed,Gospel and Religious Music
+Devotional music,Gospel and Religious Music
+"Disco, Funk and Party Music",
+Nu-disco,"Disco, Funk and Party Music"
+Italo disco,"Disco, Funk and Party Music"
+Eurodisco,"Disco, Funk and Party Music"
+Funk rock,"Disco, Funk and Party Music"
+Funk metal,"Disco, Funk and Party Music"
+Hi-NRG,"Disco, Funk and Party Music"
+Eurodance,"Disco, Funk and Party Music"
+Freestyle,"Disco, Funk and Party Music"
+Miami bass,"Disco, Funk and Party Music"
+Jersey club,"Disco, Funk and Party Music"
+Baltimore club,"Disco, Funk and Party Music"
+Ballroom,"Disco, Funk and Party Music"
+Go-go,"Disco, Funk and Party Music"
+Soundtracks and Instrumental,
+Film score,Soundtracks and Instrumental
+TV soundtrack,Soundtracks and Instrumental
+Video game music,Soundtracks and Instrumental
+Anime soundtrack,Soundtracks and Instrumental
+Cinematic music,Soundtracks and Instrumental
+Trailer music,Soundtracks and Instrumental
+Piano instrumental,Soundtracks and Instrumental
+Guitar instrumental,Soundtracks and Instrumental
+Fingerstyle guitar,Soundtracks and Instrumental
+Instrumental rock,Soundtracks and Instrumental
+Instrumental hip-hop,Soundtracks and Instrumental
+Post-classical,Soundtracks and Instrumental
+Library music,Soundtracks and Instrumental
+Production music,Soundtracks and Instrumental
+Chiptune,Soundtracks and Instrumental
+8-bit music,Soundtracks and Instrumental
+Other and Regional Genres,
+Doo-wop,Other and Regional Genres
+Easy listening,Other and Regional Genres
+Lounge music,Other and Regional Genres
+Schlager,Other and Regional Genres
+Klezmer,Other and Regional Genres
+Polka,Other and Regional Genres
+Zydeco,Other and Regional Genres
+Cajun music,Other and Regional Genres
+Fado,Other and Regional Genres
+Traditional Irish music,Other and Regional Genres
+Sea shanties,Other and Regional Genres
+Marching band music,Other and Regional Genres
+Blue-eyed pop,Other and Regional Genres
+Novelty music,Other and Regional Genres
+Comedy music,Other and Regional Genres
+Spoken word,Other and Regional Genres
+Acapella,Other and Regional Genres
+Beatboxing,Other and Regional Genres
+Children's music,Other and Regional Genres
+Musicals and show tunes,Other and Regional Genres
+Christmas music,Other and Regional Genres
+Traditional and indigenous music,Other and Regional Genres
