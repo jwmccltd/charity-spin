@@ -12,3 +12,4 @@ Route::get('/user', function (Request $request) {
 Route::get('/file-progress/{trackerKey}', [FileProcessProgressController::class, 'show']);
 Route::get('/campaign/tracker/{trackerKey}', [CampaignController::class, 'getCampaignByTrackerKey']);
 Route::get('/campaign/id/{id}', [CampaignController::class, 'getCampaignById']);
+Route::get('/campaign/track/{id}', [CampaignController::class, 'getCampaignTrack']);

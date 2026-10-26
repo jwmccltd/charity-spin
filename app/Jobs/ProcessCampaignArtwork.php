@@ -20,13 +20,15 @@ class ProcessCampaignArtwork implements ShouldQueue
     public string $trackerKey;
     public string|null $id;
 
+    public int $userId;
+
     public string $extension;
     public CampaignService $campaignService;
 
     /**
      * Create a new job instance.
      */
-    public function __construct(string $fileName, string $originalFileName, string $extension, string $trackerKey, ?string $id = null)
+    public function __construct(string $fileName, string $originalFileName, string $extension, string $trackerKey, int $userId, ?string $id = null)
     {
         $this->fileName = $fileName;
         $this->originalFileName = $originalFileName;
@@ -36,6 +38,7 @@ class ProcessCampaignArtwork implements ShouldQueue
         $this->trackerKey = $trackerKey;
         $this->campaignService = new CampaignService();
         $this->id = $id;
+        $this->userId = $userId;
     }
 
     /**
@@ -59,6 +62,7 @@ class ProcessCampaignArtwork implements ShouldQueue
             'file_key' => $this->trackerKey,
             'artwork_file_path' => $savedPath,
             'original_artwork_file_name' => $this->originalFileName,
+            'user_id' => $this->userId,
         ], $this->id);
 
         // Mark as finished

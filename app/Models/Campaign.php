@@ -16,5 +16,6 @@ class Campaign extends Model
         'artwork_file_path',
         'original_artwork_file_name',
         'description',
+        'user_id'
     ];
 }

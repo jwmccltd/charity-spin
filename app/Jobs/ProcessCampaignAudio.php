@@ -20,6 +20,7 @@ class ProcessCampaignAudio implements ShouldQueue
     public string $originalFileName;
     public string $trackerKey;
     public string|null $id;
+    public int $userId;
 
     public string $extension;
     public CampaignService $campaignService;
@@ -27,7 +28,7 @@ class ProcessCampaignAudio implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(string $fileName, string $originalFileName, string $extension, $trackerKey, ?string $id = null)
+    public function __construct(string $fileName, string $originalFileName, string $extension, string $trackerKey, int $userId, ?string $id = null)
     {
         $this->fileName = $fileName;
         $this->originalFileName = $originalFileName;
@@ -37,6 +38,7 @@ class ProcessCampaignAudio implements ShouldQueue
         $this->trackerKey = $trackerKey;
         $this->campaignService = new CampaignService();
         $this->id = $id;
+        $this->userId = $userId;
     }
 
     /**
@@ -82,6 +84,7 @@ class ProcessCampaignAudio implements ShouldQueue
             'file_key' => $this->trackerKey,
             'audio_file_path' => $this->fileName . '_processed.mp3',
             'original_audio_file_name' => $this->originalFileName,
+            'user_id' => $this->userId,
         ], $this->id);
         
         // Mark as finished

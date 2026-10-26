@@ -22,6 +22,7 @@ class FileUploadController extends Controller
                     pathinfo($file->getClientOriginalName() . '.mp3', PATHINFO_FILENAME), 
                     $file->getClientOriginalExtension(),
                     $request->input('unique_key'),
+                    Auth::id(),
                     $request->input('id') ?? null,
                 );
                 break;
@@ -35,6 +36,7 @@ class FileUploadController extends Controller
                     pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '.mp3', 
                     $file->getClientOriginalExtension(), 
                     $request->input('unique_key'),
+                    Auth::id(),
                     $request->input('id') ?? null,
                 );
                 break;

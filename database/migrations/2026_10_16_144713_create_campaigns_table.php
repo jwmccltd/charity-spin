@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
+
             $table->string('file_key')->unique();
             $table->string('audio_file_path')->nullable();
             $table->string('original_audio_file_name')->nullable();

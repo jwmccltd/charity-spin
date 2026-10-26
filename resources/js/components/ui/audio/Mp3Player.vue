@@ -1,54 +1,14 @@
-<template>
-  <div class="audio-player">
-    <!-- Hidden native audio element -->
-    <audio 
-      ref="audioRef" 
-      :src="audioSource"
-      @timeupdate="onTimeUpdate"
-      @loadedmetadata="onLoadedMetadata"
-      @ended="onTrackEnded"
-    ></audio>
-
-    <div class="player-card">
-      <h3 class="track-title">{{ trackTitle }}</h3>
-      
-      <div class="flex items-center">
-        <!-- Progress Bar Slider -->
-        <div class="progress-container h-10">
-            <span class="time-stamp">{{ formatTime(currentTime) }}</span>
-            <input 
-            type="range" 
-            min="0" 
-            :max="duration" 
-            :value="currentTime" 
-            @input="onSeek"
-            class="seek-bar"
-            />
-            <span class="time-stamp">{{ formatTime(duration) }}</span>
-        </div>
-
-        <!-- Controls -->
-        <div class="controls h-10">
-            <button @click="togglePlay" class="btn-play">
-            {{ isPlaying ? 'Pause' : 'Play' }}
-            </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
-defineProps({
+const props = defineProps({
     trackTitle: {
         type: String,
         required: true,
     },
-    audioSource: {
-        type: String,
-        required: true,
+    campaignId: {
+      type: String,
+      required: true,
     }
 })
 
@@ -70,6 +30,10 @@ const togglePlay = () => {
     isPlaying.value = true
   }
 }
+
+const audioUrl = computed(() => {
+  return `/api/campaign/track/${props.campaignId}`
+})
 
 // Keep track slider sync'd as audio plays
 const onTimeUpdate = () => {
@@ -162,3 +126,42 @@ const formatTime = (secs) => {
   background: #35495e;
 }
 </style>
+<template>
+  <div class="audio-player">
+    <!-- Hidden native audio element -->
+    <audio 
+      ref="audioRef" 
+      :src="audioUrl"
+      @timeupdate="onTimeUpdate"
+      @loadedmetadata="onLoadedMetadata"
+      @ended="onTrackEnded"
+    ></audio>
+
+    <div class="player-card">
+      <h3 class="track-title">{{ trackTitle }}</h3>
+      
+      <div class="flex items-center">
+        <!-- Progress Bar Slider -->
+        <div class="progress-container h-10">
+            <span class="time-stamp">{{ formatTime(currentTime) }}</span>
+            <input 
+            type="range" 
+            min="0" 
+            :max="duration" 
+            :value="currentTime" 
+            @input="onSeek"
+            class="seek-bar"
+            />
+            <span class="time-stamp">{{ formatTime(duration) }}</span>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls h-10">
+            <button @click="togglePlay" class="btn-play">
+            {{ isPlaying ? 'Pause' : 'Play' }}
+            </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

@@ -34,12 +34,16 @@ const currentFileName = ref<string | null>(null);
 const getFileName = (state: any) =>
     state.storedData[`original_${props.uploadType}_file_name`];
 
+const campaignId = ref<string | null>(null);
+
 campaignStore.$subscribe((_, state) => {
     currentFileName.value = getFileName(state);
+    campaignId.value = state.storedData['id'];
 });
 
 onMounted(() => {
     currentFileName.value = getFileName(campaignStore.$state);
+    campaignId.value = campaignStore.$state.storedData['id'];
 });
 
 const handleFileUpload = async (files: FileList) => {
@@ -70,10 +74,10 @@ const handleFileUpload = async (files: FileList) => {
         :additional-info="props.additionalInfo"
         @trigger-file-upload="handleFileUpload"
     />
-    <div class="flex items-center justify-between w-full h-full mt-7" v-if="currentFileName && currentFileName !== 'null'">
+    <div class="flex items-center justify-between w-full h-full mt-7" v-if="currentFileName && currentFileName !== 'null' && campaignId && campaignId !== 'null'">
         <div class="flex items-center">
             <div class="flex items-center" v-if="props.uploadType === 'audio'">
-                <Mp3Player :track-title="currentFileName"/>
+                <Mp3Player :track-title="currentFileName" :campaign-id="campaignId"/>
             </div>
             <div class="flex items-center" v-if="props.uploadType === 'artwork'"><FileImage :size="48"/> {{ currentFileName }} </div>
         </div>
