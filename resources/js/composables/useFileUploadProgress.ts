@@ -63,9 +63,9 @@ export function useFileUploadProgress() {
           }  
 
           const campaign = await axios.get(campaignUrl);
-          //formStore.storeFormData('campaignData', JSON.stringify(campaign.data));
+        
           for (const [key, value] of Object.entries(campaign.data)) {
-            campaignStore.storeFormDataItem(key, JSON.stringify(value) ?? '');
+            campaignStore.storeFormDataItem(key, value);
           }
 
           if (response.data.status === 'failed') {

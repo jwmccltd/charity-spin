@@ -1,166 +1,132 @@
+
 <script setup>
 import { ref, computed } from 'vue'
 
 const props = defineProps({
-    trackTitle: {
-        type: String,
-        required: true,
-    },
-    campaignId: {
-      type: String,
-      required: true,
-    }
+  trackTitle: {
+    type: String,
+    required: true,
+  },
+  campaignId: {
+    type: String,
+    required: true,
+  },
 })
 
-// State management
 const audioRef = ref(null)
 const isPlaying = ref(false)
 const currentTime = ref(0)
 const duration = ref(0)
 
-// Toggle play and pause states
-const togglePlay = () => {
+const audioUrl = computed(() => `/api/campaign/track/${props.campaignId}`)
+
+const togglePlay = async () => {
   if (!audioRef.value) return
 
   if (isPlaying.value) {
     audioRef.value.pause()
     isPlaying.value = false
   } else {
-    audioRef.value.play()
-    isPlaying.value = true
+    try {
+      await audioRef.value.play()
+      isPlaying.value = true
+    } catch (error) {
+      console.error('Unable to play audio:', error)
+    }
   }
 }
 
-const audioUrl = computed(() => {
-  return `/api/campaign/track/${props.campaignId}`
-})
-
-// Keep track slider sync'd as audio plays
 const onTimeUpdate = () => {
+  if (!audioRef.value) return
   currentTime.value = audioRef.value.currentTime
 }
 
-// Capture actual length once media loads
 const onLoadedMetadata = () => {
+  if (!audioRef.value) return
   duration.value = audioRef.value.duration
 }
 
-// Scrape timeline manually if user drags range slider
 const onSeek = (event) => {
-  const seekTarget = parseFloat(event.target.value)
+  if (!audioRef.value) return
+
+  const seekTarget = Number.parseFloat(event.target.value)
   audioRef.value.currentTime = seekTarget
   currentTime.value = seekTarget
 }
 
-// Reset UI state when the track runs out
 const onTrackEnded = () => {
   isPlaying.value = false
   currentTime.value = 0
 }
 
-// Format seconds into MM:SS blocks
 const formatTime = (secs) => {
-  if (isNaN(secs)) return '0:00'
+  if (!Number.isFinite(secs) || secs < 0) return '0:00'
+
   const minutes = Math.floor(secs / 60)
   const seconds = Math.floor(secs % 60)
-  return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+
+  return `${minutes}:${String(seconds).padStart(2, '0')}`
 }
 </script>
 
-<style scoped>
-.audio-player {
-  display: flex;
-  justify-content: center;
-  align-items: middle;
-  font-family: sans-serif;
-  margin: 20px;
-}
-
-.player-card {
-  background: #2c3e50;
-  color: #fff;
-  padding: 24px;
-  border-radius: 12px;
-  width: 100%;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  text-align: center;
-}
-
-.track-title {
-  margin-top: 0;
-  margin-bottom: 20px;
-  font-size: 1.2rem;
-}
-
-.progress-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.seek-bar {
-  flex-grow: 1;
-  margin: 0 10px;
-  cursor: pointer;
-}
-
-.time-stamp {
-  font-size: 0.85rem;
-  font-variant-numeric: tabular-nums;
-  width: 40px;
-}
-
-.btn-play {
-  background: #00adf1;
-  border: none;
-  color: white;
-  padding: 10px 24px;
-  font-size: 1rem;
-  border-radius: 20px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.2s ease;
-}
-
-.btn-play:hover {
-  background: #35495e;
-}
-</style>
 <template>
-  <div class="audio-player">
+  <div class="flex w-full items-center justify-center p-5 font-sans">
     <!-- Hidden native audio element -->
-    <audio 
-      ref="audioRef" 
+    <audio
+      ref="audioRef"
       :src="audioUrl"
+      preload="metadata"
       @timeupdate="onTimeUpdate"
       @loadedmetadata="onLoadedMetadata"
       @ended="onTrackEnded"
-    ></audio>
+      @pause="isPlaying = false"
+      @play="isPlaying = true"
+    />
 
-    <div class="player-card">
-      <h3 class="track-title">{{ trackTitle }}</h3>
-      
-      <div class="flex items-center">
-        <!-- Progress Bar Slider -->
-        <div class="progress-container h-10">
-            <span class="time-stamp">{{ formatTime(currentTime) }}</span>
-            <input 
-            type="range" 
-            min="0" 
-            :max="duration" 
-            :value="currentTime" 
-            @input="onSeek"
-            class="seek-bar"
-            />
-            <span class="time-stamp">{{ formatTime(duration) }}</span>
-        </div>
+    <!-- Player card -->
+    <div
+      class="w-full rounded-xl bg-slate-800 p-6 text-center text-white shadow-lg"
+    >
+      <h3 class="mb-5 mt-0 text-xl font-semibold">
+        {{ trackTitle }}
+      </h3>
 
-        <!-- Controls -->
-        <div class="controls h-10">
-            <button @click="togglePlay" class="btn-play">
-            {{ isPlaying ? 'Pause' : 'Play' }}
-            </button>
-        </div>
+      <!-- Progress bar -->
+      <div class="flex w-full items-center gap-3">
+        <span
+          class="w-10 shrink-0 text-right text-sm tabular-nums text-slate-300"
+        >
+          {{ formatTime(currentTime) }}
+        </span>
+
+        <input
+          type="range"
+          min="0"
+          :max="duration || 0"
+          :value="currentTime"
+          :disabled="!duration"
+          :aria-label="`Seek through ${trackTitle}`"
+          @input="onSeek"
+          class="h-2 min-w-0 flex-1 cursor-pointer accent-sky-500 disabled:cursor-not-allowed disabled:opacity-50"
+        />
+
+        <span
+          class="w-10 shrink-0 text-left text-sm tabular-nums text-slate-300"
+        >
+          {{ formatTime(duration) }}
+        </span>
+      </div>
+
+      <!-- Playback controls -->
+      <div class="mt-6 flex justify-center">
+        <button
+          type="button"
+          @click="togglePlay"
+          class="rounded-full bg-sky-500 px-8 py-2.5 text-base font-bold text-white transition-colors duration-200 hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-slate-800 active:scale-95"
+          :aria-label="isPlaying ? 'Pause audio' : 'Play audio'"
+        >
+          {{ isPlaying ? 'Pause' : 'Play' }}
+        </button>
       </div>
     </div>
   </div>

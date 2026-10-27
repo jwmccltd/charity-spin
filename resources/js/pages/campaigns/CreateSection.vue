@@ -53,7 +53,7 @@ const isDisabled = ref(false);
     <div class="min-h-screen bg-[#008A25]">
         <!-- Main Panel -->
         <div
-            class="fixed inset-4 z-50 mx-auto my-auto grid w-full h-full max-w-[calc(100%-2rem)] max-h-[calc(100%-2rem)] gap-4 overflow-auto rounded-lg border bg-white p-4 shadow-lg md:w-2/3 md:h-2/3 sm:p-6"
+            class="fixed inset-4 z-50 mx-auto my-auto grid w-full max-w-[calc(100%-2rem)] gap-4 overflow-auto rounded-lg border bg-white p-4 shadow-lg md:w-2/3 sm:p-6"
         >
             <div class="flex flex-col items-center p-2 sm:p-3">
                 <!-- Progress Navigation -->
