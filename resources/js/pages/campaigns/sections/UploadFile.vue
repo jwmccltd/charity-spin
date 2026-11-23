@@ -6,8 +6,8 @@ import { ref, onMounted } from 'vue';
 import { ProgressBar } from '@/components/ui/progress';
 import { useEventStore } from '@/stores/useEventStore';
 import { createFormStore } from '@/stores/formStore';
-import { FileMusic, FileImage } from '@lucide/vue';
 import { Mp3Player } from '@/components/ui/audio';
+import { ArtworkViewer } from '@/components/ui/image';
 
 const props = defineProps<{
     uploadType: string;
@@ -31,7 +31,7 @@ const useCampaignStore = createFormStore('campaign');
 const campaignStore = useCampaignStore(); 
 
 const currentFileName = ref<string | null>(null);
-    
+
 const getFileName = (state: any) =>
     state.storedData[`original_${props.uploadType}_file_name`];
 
@@ -73,15 +73,26 @@ const handleFileUpload = async (files: FileList) => {
         :title="props.title"
         :allowed-extensions="props.allowedExtensions"
         :additional-info="props.additionalInfo"
+        :max-file-size="props.maxFileSize"
         @trigger-file-upload="handleFileUpload"
     />
-    <div class="flex items-center justify-between w-full h-full mt-7" v-if="currentFileName && currentFileName !== 'null' && campaignId && campaignId !== 'null'">
-        <div class="flex items-center w-full">
-            <div class="flex items-center w-full" v-if="props.uploadType === 'audio'">
+    <div
+        v-if="currentFileName && currentFileName !== 'null' && campaignId && campaignId !== 'null'"
+        class="mx-auto mt-4 w-full max-w-3xl rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6"
+    >
+        <div class="flex w-full items-center">
+            <div v-if="props.uploadType === 'audio'" class="flex w-full items-center">
                 <Mp3Player :track-title="currentFileName" :campaign-id="campaignId"/>
             </div>
-            <div class="flex items-center" v-if="props.uploadType === 'artwork'"><FileImage :size="48"/> {{ currentFileName }} </div>
+            <div v-if="props.uploadType === 'artwork'" class="flex items-center">
+                <ArtworkViewer :campaign-id="campaignId" />
+            </div>
         </div>
     </div>
-    <ProgressBar class="mt-4" v-if="showProgressBar" :progress="progress" :status="status" />
+    <ProgressBar
+        v-if="showProgressBar"
+        class="mx-auto mt-4 w-full max-w-3xl rounded-xl border border-slate-200 bg-white p-4 sm:p-5"
+        :progress="progress"
+        :status="status"
+    />
 </template>

@@ -13,3 +13,4 @@ Route::get('/file-progress/{trackerKey}', [FileProcessProgressController::class,
 Route::get('/campaign/tracker/{trackerKey}', [CampaignController::class, 'getCampaignByTrackerKey']);
 Route::get('/campaign/id/{id}', [CampaignController::class, 'getCampaignById']);
 Route::get('/campaign/track/{id}', [CampaignController::class, 'getCampaignTrack']);
+Route::get('/campaign/artwork/{id}', [CampaignController::class, 'getCampaignArtwork']);

@@ -8,7 +8,7 @@ const props = defineProps({
     required: true,
   },
   campaignId: {
-    type: String,
+    type: [Number, String],
     required: true,
   },
 })

@@ -1,0 +1,1 @@
+export { default as ArtworkViewer } from "./ArtworkViewer.vue"

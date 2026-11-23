@@ -52,7 +52,7 @@ onBeforeUnmount(() => {
 
         <div class="h-6 overflow-hidden rounded-full bg-gray-200">
           <div
-            class="h-full rounded-full bg-black transition-all duration-300"
+            class="h-full rounded-full bg-emerald-600 transition-all duration-300"
             :style="{
               width: `${Math.min(100, Math.max(0, progress))}%`
             }"

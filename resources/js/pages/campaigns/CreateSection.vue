@@ -34,6 +34,7 @@ const isStepCompleted = (section: string) => {
 const steps = [
     { section: 'audio', label: 'Upload Audio' },
     { section: 'artwork', label: 'Add Artwork'  },
+    { section: 'genres', label: 'Select Genres'  },
     { section: 'details', label: 'Track Details'  },
     { section: 'charity', label: 'Select Charity' },
     { section: 'launch', label: 'Launch' },

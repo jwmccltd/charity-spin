@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Campaign;
+use App\Models\MusicGenre;
 use Storage;
 
 class CampaignController extends Controller
@@ -11,7 +12,9 @@ class CampaignController extends Controller
     //
     public function create()
     {
-        return inertia('campaigns/Create');
+        return inertia('campaigns/Create', [
+            'musicGenres' => MusicGenre::all(),
+        ]);
     }
 
     public function getCampaignByTrackerKey($trackerKey)
@@ -54,6 +57,29 @@ class CampaignController extends Controller
         return response()->file($absolutePath, [
             'Content-Type' => 'audio/mpeg',
             'Content-Disposition' => 'inline; filename="' . $campaign->original_audio_file_name . '"',
+        ]);
+    }
+
+    public function getCampaignArtwork($id)
+    {
+        $campaign = Campaign::where('id', $id)->firstOrFail();
+
+        // Get the relative path to the image
+        $path = $campaign->artwork_file_path;
+
+        // Check if the image exists
+        if (!Storage::disk('artist_artwork')->exists($path)) {
+            abort(404, 'Image file not found.');
+        }
+
+        // Get the absolute server path
+        $absolutePath = Storage::disk('artist_artwork')->path($path);
+
+        // Serve the image inline in the browser
+        return response()->file($absolutePath, [
+            'Content-Type' => 'image/jpeg',
+            'Content-Disposition' => 'inline; filename="' .
+                basename($campaign->original_artwork_file_name) . '"',
         ]);
     }
 }
